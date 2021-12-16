@@ -16,22 +16,23 @@ import os
 # extract the PMIDs of the papers
 def get_id(db, key, daterange=['2020/01/01', '2020/08/30']):
     Entrez.email = "ruoxing.li@uth.tmc.edu"
-    handle = Entrez.esearch(
-        db=db,
-        mindate=daterange[0],
-        maxdate=daterange[1],
-        datetype = 'pdat',
-        term=key)
-    results = Entrez.read(handle)
+#     handle = Entrez.esearch(
+#         db=db,
+#         mindate=daterange[0],
+#         maxdate=daterange[1],
+#         datetype = 'edat',
+#         term=key)
+#     results = Entrez.read(handle)
     # get the count of all papers
-    count = results['Count']
+#     count = results['Count']
     # get the ids of all papers 
     handle = Entrez.esearch(
         db=db,
         mindate=daterange[0],
         maxdate=daterange[1],
-        datetype = 'pdat',
-        retmax=count,
+        datetype = 'edat',
+#         retmax=count,
+        field='TI',
         term=key)
     results = Entrez.read(handle)
     return results
@@ -51,7 +52,8 @@ def get_paper(id_list):
 # output: csv file containing 'title, authors and publication time' of the papers
 def get_csv(papers, csv_fname):
     df = pd.DataFrame.from_dict(papers)
-    df_f = df[['TI', 'FAU', 'DP', 'AB']]
+    df_f = df[['TI', 'FAU', 'EDAT', 'AB']]
+    df_f.columns = ['TI', 'FAU', 'DP', 'AB']
     df_f.to_csv(csv_fname, index=False)
 
 
