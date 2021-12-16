@@ -32,6 +32,7 @@ def get_id(db, key, daterange=['2020/01/01', '2020/08/30']):
         maxdate=daterange[1],
         datetype = 'edat',
 #         retmax=count,
+        retmax=10000,
         field='TI',
         term=key)
     results = Entrez.read(handle)
