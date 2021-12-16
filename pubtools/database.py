@@ -34,6 +34,6 @@ def data_func(csv_f):
     return results
 
 
-if __name__ == '__main__':
-    results = data_func(csv_f='HIV.csv')
-    print(results)
+#if __name__ == '__main__':
+ #   results = data_func(csv_f='HIV.csv')
+  #  print(results)
